@@ -1,0 +1,24 @@
+[gd_scene load_steps=3 format=3 uid="uid://dxfamuvs6nknu"]
+
+[ext_resource type="Script" path="res://player/player.gd" id="1_x8wi3"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_s1rw0"]
+
+[node name="Player" type="CharacterBody3D"]
+script = ExtResource("1_x8wi3")
+
+[node name="axis_y" type="Node3D" parent="."]
+
+[node name="axis_x" type="Node3D" parent="axis_y"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.5, 0)
+
+[node name="holder" type="Node3D" parent="axis_y/axis_x"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+
+[node name="Camera3D" type="Camera3D" parent="axis_y/axis_x"]
+
+[node name="ray_activator" type="RayCast3D" parent="axis_y/axis_x"]
+target_position = Vector3(0, 0, -2)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CapsuleShape3D_s1rw0")

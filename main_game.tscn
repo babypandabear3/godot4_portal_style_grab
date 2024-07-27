@@ -1,0 +1,47 @@
+[gd_scene load_steps=7 format=3 uid="uid://bnulgdk1v1s5e"]
+
+[ext_resource type="Texture2D" uid="uid://bgc7ksewyja6g" path="res://texture/basic-grid-tex.png" id="1_p8uuh"]
+[ext_resource type="PackedScene" uid="uid://dxfamuvs6nknu" path="res://player/player.tscn" id="2_o1scj"]
+[ext_resource type="PackedScene" uid="uid://cvbtm7a5nqijj" path="res://grabable/grabable_box.tscn" id="3_511c0"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_5rrk8"]
+size = Vector3(30, 1, 30)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_m0lga"]
+albedo_texture = ExtResource("1_p8uuh")
+uv1_triplanar = true
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ljos0"]
+size = Vector3(30, 1, 30)
+
+[node name="main_game" type="Node3D"]
+
+[node name="Floor" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_5rrk8")
+surface_material_override/0 = SubResource("StandardMaterial3D_m0lga")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Floor/StaticBody3D"]
+shape = SubResource("BoxShape3D_ljos0")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.820571, -0.371802, 0.434081, 0, 0.759487, 0.650522, -0.571545, -0.5338, 0.623213, 5.2675, 7.65551, 0)
+shadow_enabled = true
+
+[node name="Player" parent="." instance=ExtResource("2_o1scj")]
+
+[node name="GrabableBox" parent="." instance=ExtResource("3_511c0")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, -4)
+
+[node name="Label" type="Label" parent="."]
+offset_left = 64.0
+offset_top = 64.0
+offset_right = 296.0
+offset_bottom = 165.0
+text = "WASD    : MOVE AROUND
+MOUSE : LOOK
+SPACE    : JUMP
+E             : GRAB / RELEASE BOX
+eSC        : QUIT
+"
